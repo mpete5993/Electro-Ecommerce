@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/admin', function () {
+    return 'you are admin';
+})->middleware(['auth', 'auth.admin']);
+
 //Shop
 Route::get('/store', [App\Http\Controllers\StoreController::class, 'index'])->name('store');
 Route::get('/store/{product}', [App\Http\Controllers\StoreController::class, 'show'])->name('store.show');
@@ -38,3 +43,17 @@ Route::get('/checkout', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/* ############ admin  ##############*/
+Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function(){
+
+   
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('users', 'UserController' , ['except' => ['show', 'create', 'store']]);
+    Route::resource('categories', 'CategoryController' , ['except' => ['show']]);
+    Route::resource('tags', 'TagController' , ['except' => ['show']]);
+    Route::resource('posts', 'PostController' , ['except' => ['show']]);
+    Route::resource('products', 'ProductController' , ['except' => ['show']]);
+
+});
+/* ############ admin ##############*/
