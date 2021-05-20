@@ -1,0 +1,40 @@
+<ul class="header-links pull-right logged_user">
+								@guest
+									<li class="nav-item">
+										<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+									</li>
+									@if (Route::has('register'))
+										<li class="nav-item">
+											<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+										</li>
+									@endif
+								@else
+									<li class="nav-item dropdown">
+										<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+											<img src="{{ URL::to('/storage')}}/{{ Auth::user()->avatar}} " width="25px" height="25px"
+										style="border-radius: 10px;">
+											{{ Auth::user()->name }} <span class="caret"></span>
+										</a>
+
+										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+											<a  style="color:#333;  display:block; " class="dropdown-item text-center" href="/user-profile">
+											<i style="margin-left:10px" class="fa fa-user-o" aria-hidden="true"></i>
+												{{ __('My Account') }}
+
+											</a><br>
+
+											{{-- <a  style="color:#333;  display:block; " class="dropdown-item text-center" href="{{ route('logout') }}"
+											onclick="event.preventDefault();
+															document.getElementById('logout-form').submit();">
+											<i style="margin-left:10px" class="fa fa-sign-out" aria-hidden="true"></i> {{ __('Logout') }}
+
+											</a> --}}
+											
+
+											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+												@csrf
+											</form>
+										</div>
+									</li>
+								@endguest
+							</ul>
