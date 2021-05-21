@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Rhobeta</title>
+		<title>Electro - E-commerce</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -97,7 +97,7 @@
 								@else
 									<li class="nav-item dropdown">
 										<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-											<img src="{{ URL::to('/storage')}}/{{ Auth::user()->avatar}} " width="25px" height="25px"
+											<img src="{{ URL::to('Images/')}}/{{ Auth::user()->avatar}} " width="25px" height="25px"
 										style="border-radius: 10px;">
 											{{ Auth::user()->name }} <span class="caret"></span>
 										</a>
@@ -168,7 +168,7 @@
 									<a href=" {{ url('wishlist') }}">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
-										<div class="qty">8</div>
+										<div class="qty">{{ Cart::instance('wishlist')->count() }}</div>
 									</a>
 								</div>
 								<!-- /Wishlist -->
@@ -178,7 +178,7 @@
 									<a class="dropdown-toggle __cart_icon" data-toggle="dropdown"  aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">5</div>
+										<div class="qty">{{ Cart::instance('default')->count() }}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
@@ -188,8 +188,8 @@
 										<h5>SUBTOTAL: R </h5>
 										</div>
 										<div class="cart-btns">
-											<a href=" {{url('shoppingcart')}} ">View Cart</a>
-											<a href="{{url('checkout')}}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href=" {{route('cart.index')}} ">View Cart</a>
+											<a href="{{route('checkout.index')}}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>

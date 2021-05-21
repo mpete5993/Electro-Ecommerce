@@ -15,6 +15,11 @@ class CategoriesTableSeeder extends Seeder
     {
         //
         $category = Category::create([
+            'name' => 'Accessories',
+            'slug' => 'Accessories',
+        ]);
+        
+        $category = Category::create([
             'name' => 'Laptop',
             'slug' => 'Laptop',
         ]);
@@ -26,10 +31,7 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Desktop',
             'slug' => 'Desktop',
         ]);
-        $category = Category::create([
-            'name' => 'Accessory',
-            'slug' => 'Accessory',
-        ]);
+        
         $category = Category::create([
             'name' => 'Tablet',
             'slug' => 'Tablet',

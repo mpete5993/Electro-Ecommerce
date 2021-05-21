@@ -17,10 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/admin', function () {
-    return 'you are admin';
-})->middleware(['auth', 'auth.admin']);
+Route::get('/empty', function () {
+    Cart::instance('default')->destroy();
+});
 
 //Shop
 Route::get('/store', [App\Http\Controllers\StoreController::class, 'index'])->name('store');
@@ -30,30 +29,43 @@ Route::get('/search', [App\Http\Controllers\StoreController::class, 'search'])->
 //Blog
 Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [App\Http\Controllers\BlogController::class, 'show'])->name('post.show');
+Route::post('/comment/{post_id}', [App\Http\Controllers\CommentsController::class, 'store'])->name('comments.store');
+Route::get('/postSearch',  [App\Http\Controllers\BlogController::class, 'search'])->name('post.search');
 
 
-Route::get('/cart', function () {
-    return view('cart');
-});
+Route::get('/cart',  [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+Route::post('/cart',  [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+Route::get('/checkout',  [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
 
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+Route::get('/cart/incr/{id}/{qty}',  [App\Http\Controllers\CartController::class, 'incr'])->name('cart.incr');
+Route::get('/cart/decr/{id}/{qty}',  [App\Http\Controllers\CartController::class, 'decr'])->name('cart.decr');
+Route::delete('/cart/{product}',  [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/cart/{product}',  [App\Http\Controllers\CartController::class, 'wishlist'])->name('cart.wishlist');
+
+// wishlist
+Route::get('/wishlist', [App\Http\Controllers\WishlistController::class, 'index'] )->name('wishlist.index');
+Route::post('/wishlist/{product}',[App\Http\Controllers\WishlistController::class,'switchToCart'])->name('wishlist.show');//add to cart
+Route::delete('/wishlist/{product}',[App\Http\Controllers\WishlistController::class, 'destroy'])->name('wishlist.destroy');//delete item
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/* ############ admin  ##############*/
+
+
+/* ############ admin routes ##############*/
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function(){
 
    
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', 'UserController' , ['except' => ['show', 'create', 'store']]);
     Route::resource('categories', 'CategoryController' , ['except' => ['show']]);
+    Route::resource('brands', 'BrandsController' , ['except' => ['show']]);
     Route::resource('tags', 'TagController' , ['except' => ['show']]);
     Route::resource('posts', 'PostController' , ['except' => ['show']]);
     Route::resource('products', 'ProductController' , ['except' => ['show']]);
+    Route::resource('properties', 'PropertyController' , ['except' => ['show']]);
 
 });
-/* ############ admin ##############*/
+/* ############ admin routes ##############*/

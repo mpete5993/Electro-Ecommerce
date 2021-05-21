@@ -116,7 +116,7 @@
                         <div class="comment-user-info">
                             <span class=""> showing {{$comments->count() }} - {{ $comments->total() }} comments</span>
                         </div>
-                    <div class="comment-form">
+                    <div class="comment-form ">
                         @guest
                             <a href=" " class="learn_more">
                                 <span class="property-count">Login to comment</span>
@@ -128,27 +128,31 @@
                                 <div class="col-lg-12">
                                     <h6><i class="fa fa-comment" aria-hidden="true" style="color: #ddd;"></i> Leave your Comment</h6>
                                 </div>
-                            </div>
-                            <form action=" {{ route('comments.store', $post->id)}} " method="post">
-                                @csrf
-                                {{ method_field('POST') }}
-                                <div class="row comment-input ">
-                                        {{-- <div class="col-lg-12 ">
-                                            <input type="text" name="name" placeholder="Enter your Name">
-                                            <input type="email" name="email" placeholder="Enter your Email">
-                                        </div> --}}
-                                        <div class="col-lg-12">
-                                            <div class="" style="margin-top: 20px; margin-bottom:10px;">
-                                                <textarea class="ckeditor form-control" name="comment">
-                                        
-                                                </textarea>
-                                            </div>
-                                            <div class="">
-                                                <button>send <i class="fa fa-arrow-circle-o-right"></i></button>
-                                            </div>
-                                        </div>
-                                </div>
-                            </form>
+							</div>
+							<div class="row">
+                                <div class="col-lg-12">
+									<form action=" {{ route('comments.store', $post->id)}} " method="post">
+										@csrf
+										{{ method_field('POST') }}
+										<div class="row comment-input ">
+												{{-- <div class="col-lg-12 ">
+													<input type="text" name="name" placeholder="Enter your Name">
+													<input type="email" name="email" placeholder="Enter your Email">
+												</div> --}}
+												<div class="col-lg-7">
+													<div class="" style="margin-top: 20px; margin-bottom:10px;">
+														<textarea class="ckeditor form-control" name="comment">
+												
+														</textarea>
+													</div>
+													<div class="">
+														<button>send <i class="fa fa-arrow-circle-o-right"></i></button>
+													</div>
+												</div>
+										</div>
+									</form>
+								</div>
+							</div>
                         </div>
                         @endguest
                     </div>
@@ -253,6 +257,13 @@
 		<!-- Go to www.addthis.com/dashboard to customize your tools -->
 			<!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f82004899d50158"></script>
+<script src="{{asset('CKeditor/ckeditor.js')}}"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.ckeditor').ckeditor();
+            });
+        </script>
 
 @include('layouts.footer')
 

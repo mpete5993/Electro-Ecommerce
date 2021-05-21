@@ -73,21 +73,21 @@
             <!-- row -->
 
              <!-- row -->
-            @if (Cart::content()->count() > 0)
+            @if (Cart::instance('default')->content()->count() > 0)
                 @foreach (Cart::content() as $item)
                 <div class="row item__container">
                     <div class="col-lg-10 item_list ">
                         <div class="row cart__item">
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="product__img">
-                                    <a href="product/{{ $item->model->slug }}">
-                                            <img src=" {{ asset('storage/' . $item->model->image) }}" alt="">
+                                    <a href="{{ route('store.show', $item->model->slug) }}">
+                                        <img src=" {{ asset($item->model->image) }}" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-4  col-md-4 col-sm-4 col-xs-12">
                                 <div class="product__name">
-                                    <h5><b><a href="product/{{ $item->model->slug }}"><b> {{ $item->model->Name }} </b></a></b></h5>
+                                    <h5><b><a href="{{ route('store.show', $item->model->slug) }}"><b> {{ $item->model->product_name }} </b></a></b></h5>
                                     <p> {{ $item->model->details }} </p>
                                 </div>
                                 <div class="">
@@ -121,7 +121,7 @@
                                         <form action="{{ route('cart.destroy', $item->rowId) }}" method="post">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                        <button type="submit"><i class="fa fa-trash text-danger"></i> remove</button>
+                                            <button type="submit"><i class="fa fa-trash text-danger"></i> remove</button>
                                         </form>
                                     </div>
                                     <div class="">
@@ -140,7 +140,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <p>No Items in the cart</p>
-                        <a href=" {{ route('store.allproducts') }}" class="btn learn_more">
+                        <a href=" {{ route('store') }}" class="btn learn_more">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i> GO BACK TO SHOP
                         </a>
                     </div>

@@ -107,8 +107,8 @@
 								</ul>
 							@endif
 							
-								<form action="  " method="post">
-									{{ csrf_field() }}
+							<form action="{{ route('cart.store') }}" method="POST">
+								{{ csrf_field() }}
 								<div class="qty-label">
 									Qty
 									<div class="input-number">
@@ -118,9 +118,10 @@
 									</div>
 								</div>
 								
-									<input type="hidden" name="id" value="">
-									<input type="hidden" name="name" value="">
-									<input type="hidden" name="price" value="">
+									<input type="hidden" name="id" value=" {{$product->id}} ">
+									<input type="hidden" name="name" value="{{$product->product_name}} ">
+									<input type="hidden" name="price" value="{{$product->current_price}} ">
+									<input type="hidden" name="qty" value="1">
 									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 								</form>
 							</div>
@@ -135,7 +136,7 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								{{-- <li><a href="#">{{implode(',',$product->categories()->get()->pluck('name')->toArray())}} </a></li> --}}
+								<li><a href="#">{{implode(' , ',$product->category()->get()->pluck('name')->toArray())}} </a></li>
 								
 							</ul>
 							
@@ -400,14 +401,14 @@
 												</div> --}}
 											</div>
 											<div class="add-to-cart">
-												<form action=" " method="post">
-													{{ csrf_field() }}
-													<input type="hidden" name="id" value=">
-													<input type="hidden" name="name" value="">
-													<input type="hidden" name="price" value="">
-													<input type="hidden" name="qty" value="1">
-												 	<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-												</form>
+												<form action="{{ route('cart.store') }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id" value=" {{$product->id}} ">
+                                                    <input type="hidden" name="name" value="{{$product->product_name}} ">
+                                                    <input type="hidden" name="price" value="{{$product->current_price}} ">
+                                                    <input type="hidden" name="qty" value="1">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                </form>
 											</div>
 										</div>
 										

@@ -16,7 +16,7 @@ class TagController extends Controller
     public function index()
     {
         //
-        return view('admin.itemsList.tagList')->with('tags', Tag::orderBy('created_at', 'desc')->latest()->paginate(5));
+        return view('admin.itemsList.tagList')->with('tags', Tag::orderBy('created_at', 'desc')->latest()->paginate(8));
     }
 
     /**

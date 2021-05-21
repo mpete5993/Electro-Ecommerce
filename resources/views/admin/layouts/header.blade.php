@@ -31,8 +31,8 @@
                     <a href="{{ route('admin.dashboard' )}}" style="text-decoration: none"><h3><span><i class="fa fa-dashboard"></i></span>Dashboard</h3></a>
                 </div>
                 <div class="">
-                    <button class="accordion"><i class="fa fa-building"
-                            style="margin-right: 20px;color: #00c0ef;"></i>properties <i
+                    <button class="accordion"><i class="fa fa-shopping-basket"
+                            style="margin-right: 20px;color: #00c0ef;"></i>Products <i
                             class="fa fa-angle-down" style="float: right;"></i></button>
                     <ul class="panel">
                         <li>
@@ -41,7 +41,7 @@
                         </li>
                         <li>
                             <span><a href="{{ route('admin.properties.index')}}"><i class="fa fa-table" style="margin-right: 10px;"></i> View
-                                    Properties</a></span>
+                                Products</a></span>
                         </li>
                     </ul>
                 </div>
@@ -57,6 +57,21 @@
                         </li>
                         <li>
                             <span><a href=" {{ route('admin.categories.index' )}} "><i class="fa fa-table" style="margin-right: 10px;"></i> View
+                                    Categories</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="">
+                    <button class="accordion"><i class="fa fa-gavel"
+                            style="margin-right: 20px;color: #00c0ef;"></i>Brands <i
+                            class="fa fa-angle-down" style="float: right;"></i></button>
+                    <ul class="panel">
+                        <li>
+                            <span> <a href=" {{ route('admin.brands.create' )}} " class=""><i class="fa fa-plus-square " style="margin-right: 10px;"></i>Add
+                                    Category</a></span>
+                        </li>
+                        <li>
+                            <span><a href=" {{ route('admin.brands.index' )}} "><i class="fa fa-table" style="margin-right: 10px;"></i> View
                                     Categories</a></span>
                         </li>
                     </ul>

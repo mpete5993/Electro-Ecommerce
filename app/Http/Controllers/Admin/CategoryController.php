@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return view('admin.itemsList.categoryList')->with('categories', Category::orderBy('created_at', 'desc')->latest()->paginate(5));
+        return view('admin.itemsList.categoryList')->with('categories', Category::orderBy('created_at', 'desc')->latest()->paginate(8));
     }
 
     /**
@@ -92,7 +92,7 @@ class CategoryController extends Controller
 
         toastr()->success('Item update successfully .!');
 
-        return view('admin.itemsList.categoryList')->with(['categories' => Category::orderBy('created_at', 'desc')->latest()->paginate(5)]);
+        return view('admin.itemsList.categoryList')->with(['categories' => Category::orderBy('created_at', 'desc')->latest()->paginate(8)]);
     }
 
     /**

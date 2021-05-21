@@ -190,11 +190,11 @@
                                                 
                                                 </div>
                                             <div class="add-to-cart">
-                                                <form action=" " method="POST">
+                                                <form action=" {{ route('cart.store') }} " method="POST">
                                                     {{ csrf_field() }}
-                                                    <input type="hidden" name="id" value="">
-                                                    <input type="hidden" name="name" value="">
-                                                    <input type="hidden" name="price" value="">
+                                                    <input type="hidden" name="id" value=" {{$product->id}} ">
+                                                    <input type="hidden" name="name" value="{{$product->product_name}} ">
+                                                    <input type="hidden" name="price" value="{{$product->current_price}} ">
                                                     <input type="hidden" name="qty" value="1">
                                                     <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                 </form>
