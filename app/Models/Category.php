@@ -21,6 +21,8 @@ class Category extends Model
         return $this->belongsToMany('App\Models\Post');
     }
 
-    
+    public function  CategoryProduct($products){
+        return null !== $this->products()->where('name', $category)->first();
+    }
     use HasFactory;
 }

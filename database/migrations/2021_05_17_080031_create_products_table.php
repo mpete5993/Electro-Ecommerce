@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->longText('Description');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->string('image');
+            $table->boolean('status')->nullable()->default(false);
             $table->timestamps();
         });
     }

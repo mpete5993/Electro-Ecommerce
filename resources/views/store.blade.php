@@ -12,7 +12,6 @@
 						<li><a href="{{ url('/about') }} ">About us</a></li>
 						<li><a href="{{ url('/blog') }} ">Blog</a></li>
 						<li><a href="{{ url('/contact') }} ">Contact Us</a></li>
-						<li><a href="{{ url('/shoppingcart') }} ">Shopping Cart</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -109,7 +108,7 @@
 										</div>
 									</a>
 										<div class="product-body">
-											{{-- <p class="product-category">{{implode(',',$product->categories()->get()->pluck('name')->toArray())}} </p> --}}
+											<p class="product-category">{{implode(',',$product->category()->get()->pluck('name')->toArray())}} </p>
 											<h3 class="product-name"><a href=" {{ route('store.show', $product->slug) }} "> {{ $product->product_name}} </a></h3>
 											<h4 class="product-price">R{{ $product->current_price}} <del class="product-old-price">R{{ $product->previous_price}}  </del></h4>
 										</div>
@@ -178,7 +177,7 @@
                                         </div>
                                     </a>
                                 <div class="product-body">
-                                    {{-- <p class="product-category"> {{implode(',',$product->categories()->get()->pluck('name')->toArray())}} </p> --}}
+									<p class="product-category">{{implode(',',$product->category()->get()->pluck('name')->toArray())}} </p>
                                         <h3 class="product-name"><a href=""> {{ $product->product_name }} </a></h3>
                                         <h4 class="product-price">R{{ $product->current_price }}<del class="product-old-price">R{{ $product->previous_price }} </del></h4>
                                         
@@ -221,7 +220,7 @@
 								<li><a href="#">4</a></li>
 								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                             </ul> --}}
-                            {{-- {{ $products->links() }} --}}
+                            {{ $products->links() }}
 							{{-- {{ $RelatedProduct->appends(request()->input())->links() }} --}}
 						</div>
 						<!-- /store bottom filter -->

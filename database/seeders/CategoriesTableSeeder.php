@@ -56,5 +56,9 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Hot Deals',
             'slug' => 'Hot-deals',
         ]);
+        $category = Category::create([
+            'name' => 'Head phones',
+            'slug' => 'Head-phones',
+        ]);
     }
 }

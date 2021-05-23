@@ -189,8 +189,33 @@
 				<!-- /container -->
 			</div>
 			<!-- /bottom footer -->
+			<div class="scroll-to-top-style2 scroll-to-target" data-target="html" style="display: block;">
+				<a href="#top-header"><span class="fa fa-angle-up"></span></a>
+			</div>
 		</footer>
 		<!-- /FOOTER -->
+		<script>
+		/* When the user clicks on the button,
+		toggle between hiding and showing the dropdown content */
+		
+		function myFunction() {
+		document.getElementById("myDropdown").classList.toggle("show");
+		}
+
+		// Close the dropdown menu if the user clicks outside of it
+		window.onclick = function(event) {
+		if (!event.target.matches('.dropbtn')) {
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+			}
+		}
+		}
+		</script>
 
 		<!-- jQuery Plugins -->
 		<script src="{{ asset('app/js/jquery.min.js') }}"></script>

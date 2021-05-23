@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        //filter by categories
         if(request()->category){
             $posts = Post::with('category')->whereHas('category', function($query){
                 $query->where('slug', request()->category);

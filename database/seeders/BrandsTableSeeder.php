@@ -47,5 +47,13 @@ class BrandsTableSeeder extends Seeder
             'name' => 'Apple',
             'slug' => 'Apple',
         ]);
+        $brands = Brand::create([
+            'name' => 'MSI',
+            'slug' => 'MSI',
+        ]);
+        $brands = Brand::create([
+            'name' => 'Acer',
+            'slug' => 'Acer',
+        ]);
     }
 }

@@ -96,31 +96,26 @@
 									@endif
 								@else
 									<li class="nav-item dropdown">
-										<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-											<img src="{{ URL::to('Images/')}}/{{ Auth::user()->avatar}} " width="25px" height="25px"
+										<img src="{{ URL::to('Images/')}}/{{ Auth::user()->avatar}} " width="25px" height="25px"
 										style="border-radius: 10px;">
-											{{ Auth::user()->name }} <span class="caret"></span>
-										</a>
 
-										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-											<a  style="color:#333;  display:block; " class="dropdown-item text-center" href="/user-profile">
-											<i style="margin-left:10px" class="fa fa-user-o" aria-hidden="true"></i>
-												{{ __('My Account') }}
-
-											</a><br>
-
-											{{-- <a  style="color:#333;  display:block; " class="dropdown-item text-center" href="{{ route('logout') }}"
-											onclick="event.preventDefault();
-															document.getElementById('logout-form').submit();">
-											<i style="margin-left:10px" class="fa fa-sign-out" aria-hidden="true"></i> {{ __('Logout') }}
-
-											</a> --}}
-											
-
-											<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-												@csrf
-											</form>
-										</div>
+										<div class="dropdown">
+											<button onclick="myFunction()" class="dropbtn">
+												{{ Auth::user()->name }} <i class="fa fa-caret-down" aria-hidden="true"></i>
+											</button>
+											<div id="myDropdown" class="dropdown-content">
+												<a href=" {{ url('profile') }} "><i class="fa fa-user"></i> My Profile</a>
+												
+												<a href=" {{ url('admin/dashboard') }} "><i class="fa fa-dashboard"></i>  Dashboard</a>
+												
+											   <a href="{{ route('logout') }}" onclick="event.preventDefault();
+														document.getElementById('logout-form').submit();">
+														<i class="fa fa-power-off"></i> {{ __('Logout') }}</a>
+												<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+													@csrf
+												</form>
+											</div>
+										  </div>
 									</li>
 								@endguest
 							</ul>
@@ -182,10 +177,35 @@
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
+											@if (Cart::instance('default')->count() > 0)
+
+												@foreach (Cart::instance('default')->content() as $item)
+													
+													<div class="product-widget">
+														<div class="product-img">
+															<a href="{{ route('store.show',$item->model->slug)}} "> 
+																<img src=" {{ asset($item->model->image)}} " width="60px" height="50px" alt="">
+															</a>
+														</div>
+														<div class="product-body">
+															<h3 class="product-name"><a href="{{ route('store.show',$item->model->slug)}} "> {{$item->model->product_name}} </a></h3>
+															<h4 class="product-price"><span class="qty">1x</span>R {{$item->model->current_price}}</h4>
+														</div>
+														
+													</div>
+												@endforeach
+												@else 
+												<div class="product-widget">
+													<div class="">
+														<p>No Items in the cart</p>
+													</div>
+												</div>
+
+											@endif	
 										</div>
 										<div class="cart-summary">
-											<small>Item(s) selected</small>
-										<h5>SUBTOTAL: R </h5>
+											<small>{{Cart::instance('default')->count()}} Item(s) selected</small>
+										<h5>SUBTOTAL: R {{Cart::instance('default')->subtotal()}}</h5>
 										</div>
 										<div class="cart-btns">
 											<a href=" {{route('cart.index')}} ">View Cart</a>

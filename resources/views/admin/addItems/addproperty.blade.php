@@ -14,7 +14,7 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <!-- form start -->
-                                <form method="POST" action=" {{ route('admin.properties.store')}} " enctype="multipart/form-data">
+                                <form method="POST" action=" {{ route('admin.product.store')}} " enctype="multipart/form-data">
                                     @csrf
                                     {{ method_field('POST') }}
 

@@ -15,7 +15,7 @@
 						<li><a href="{{ url('/about') }} ">About us</a></li>
 						<li><a href="{{ url('/blog') }} ">Blog</a></li>
                         <li><a href="{{ url('/contact') }} ">Contact Us</a></li>
-                        <li><a href="{{ url('/shoppingcart') }} ">Shopping Cart</a></li>
+                        <li><a href="{{ url('/cart') }} "> Cart</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>

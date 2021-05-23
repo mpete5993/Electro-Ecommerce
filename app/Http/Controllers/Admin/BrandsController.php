@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use \Illuminate\Support\Str;
 
 class BrandsController extends Controller
 {
@@ -42,7 +43,7 @@ class BrandsController extends Controller
         //
         $brand = Brand::create([
             'name' => $request->brand,
-            'slug' => \Illuminate\Support\Str::slug($request->brand),
+            'slug' => Str::slug($request->brand),
         ]);
 
         toastr()->success('Item Added successfully!');

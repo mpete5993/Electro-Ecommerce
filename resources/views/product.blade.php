@@ -14,7 +14,6 @@
 						<li><a href="{{ url('/about') }} ">About us</a></li>
 						<li><a href="{{ url('/blog') }} ">Blog</a></li>
 						<li><a href="{{ url('/contact') }} ">Contact Us</a></li>
-						<li><a href="{{ url('/shoppingcart') }} ">Shopping Cart</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -68,7 +67,11 @@
 							</div>
 							<div>
 							<h3 class="product-price">R {{ $product->current_price }} <del class="product-old-price">R {{ $product->previous_price }} </del></h3>
-								<span class="product-available">In Stock</span>
+								@if ($product->status == false)
+								<span class="text-danger">Out Stock</span>
+								@elseif($product->status == true)
+								<span class="text-success">In Stock</span>
+								@endif
 							</div>
 							<div class="">
 								<p><b>{{ $product->details }} </b></p>
@@ -121,8 +124,12 @@
 									<input type="hidden" name="id" value=" {{$product->id}} ">
 									<input type="hidden" name="name" value="{{$product->product_name}} ">
 									<input type="hidden" name="price" value="{{$product->current_price}} ">
-									<input type="hidden" name="qty" value="1">
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+
+									@if ($product->status == false)
+										<button class="add-to-cart-btn" disabled style="cursor: not-allowed;"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									@elseif($product->status == true)
+										<button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> add to cart</button>
+									@endif
 								</form>
 							</div>
 
@@ -166,7 +173,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row ">
 										<div class="col-md-12 product_desciption">
-											{{$product->Description }}
+											{!! $product->Description !!}
 										</div>
 									</div>
 								</div>

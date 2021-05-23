@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use \Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -41,7 +42,7 @@ class TagController extends Controller
        //
        $tag = Tag::create([
         'name' => $request->tag,
-        'slug' => \Illuminate\Support\Str::slug($request->tag),
+        'slug' => Str::slug($request->tag),
     ]);
     toastr()->success('Tag  added successfully .!');
         return view('admin.addItems.addtag');

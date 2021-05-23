@@ -31,16 +31,16 @@
                     <a href="{{ route('admin.dashboard' )}}" style="text-decoration: none"><h3><span><i class="fa fa-dashboard"></i></span>Dashboard</h3></a>
                 </div>
                 <div class="">
-                    <button class="accordion"><i class="fa fa-shopping-basket"
+                    <button class="accordion"><i class="fa fa-shopping-bag"
                             style="margin-right: 20px;color: #00c0ef;"></i>Products <i
                             class="fa fa-angle-down" style="float: right;"></i></button>
                     <ul class="panel">
                         <li>
-                            <span> <a href=" {{ route('admin.properties.create') }} " class=""><i class="fa fa-plus-square " style="margin-right: 10px;"></i>Add
-                                    Property</a></span>
+                            <span> <a href=" {{ route('admin.products.create') }} " class=""><i class="fa fa-plus-square " style="margin-right: 10px;"></i>Add
+                                Products</a></span>
                         </li>
                         <li>
-                            <span><a href="{{ route('admin.properties.index')}}"><i class="fa fa-table" style="margin-right: 10px;"></i> View
+                            <span><a href="{{ route('admin.products.index')}}"><i class="fa fa-table" style="margin-right: 10px;"></i> View
                                 Products</a></span>
                         </li>
                     </ul>

@@ -19,6 +19,8 @@ class Product extends Model
         return $this->belongsToMany('App\Models\Category');
     }
 
-    
+    public function  CategoryProduct($category){
+        return null !== $this->category()->where('name', $category)->first();
+    }
     use HasFactory;
 }
