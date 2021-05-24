@@ -66,10 +66,17 @@
                                             {{$product->Description}}
                                         </textarea>
                                     </div>
-                                    <div class="form-inputs">
-                                        <label for="tags">Out Stock</label><br>
-                                        <input type="checkbox" name="instock" id="">
-                                    </div>
+                                    @if ($product->status == true)
+                                        <div class="form-inputs">
+                                            <label for="tags">Out Stock</label><br>
+                                            <input type="checkbox" name="outstock" id="">
+                                        </div>
+                                        @else
+                                        <div class="form-inputs">
+                                            <label for="tags">In Stock</label><br>
+                                            <input type="checkbox" name="instock" id="">
+                                        </div>
+                                    @endif
                                     <div class="form-inputs">
                                         <button><i class="fa fa-plus-square"></i> Add Property </button>
                                     </div>

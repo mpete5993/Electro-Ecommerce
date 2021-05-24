@@ -14,7 +14,7 @@
                                 <div class="admin-tables">
   
                                   <div class="searchItems">
-                                      <input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search for Address">
+                                      <input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Enter product name">
                                   </div>
                                   <table class="itemsTable" id="myTable">
                                       <tr class="tableHeader">

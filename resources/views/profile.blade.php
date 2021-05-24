@@ -1,5 +1,46 @@
 @include('layouts.header')
 
+   <!-- NAVIGATION -->
+   <nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li><a href=" {{ url('/') }} ">Home</a></li>
+                <li><a href=" {{ url('/store') }} ">Shop</a></li>
+                <li><a href="{{ url('/about') }} ">About us</a></li>
+                <li><a href="{{ url('/blog') }} ">Blog</a></li>
+                <li><a href="{{ url('/contact') }} ">Contact Us</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">checkout</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href=" {{ url('/') }} ">Home</a></li>
+                    <li class="active">Your profile</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
 <!---===== agents container====== ---->
 <div class="agents-container">
     <div class="container">

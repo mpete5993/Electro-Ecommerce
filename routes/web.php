@@ -41,7 +41,7 @@ Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updatePro
 //checkout
 // Route::get('stripe', [App\Http\Controllers\CheckoutController::class, 'stripe']);
 Route::post('stripe', [App\Http\Controllers\CheckoutController::class, 'stripePost'])->name('stripe.post');
-Route::get('/checkout',  [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/checkout',  [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 
 Auth::routes();
 /* ############ admin routes ##############*/

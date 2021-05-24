@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Mail;
 use Stripe;
+use Auth;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Mail\OrderPlaced;
 use Session;
 use Illuminate\Http\Request;
 
@@ -38,9 +43,12 @@ class CheckoutController extends Controller
      */
     public function stripePost(Request $request)
     {
+        $content = Cart::content()->map(function($item){
+            return $item->model->slug.',' .$item->qty;
+        })->values()->toJson();
         
         try {
-            //code...
+           //checkout with strippe
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             Stripe\Charge::create ([
                     "amount" => Cart::total() * 100,
@@ -50,17 +58,43 @@ class CheckoutController extends Controller
                     "description" => "This payment is tested purpose lara-ecommerce.dev",
                     
                     'metadata' => [
-                        // 'contents' => $content,
-                        // 'quantity' => Cart::instance('default')->count(),
+                        'contents' => $content,
+                        'quantity' => Cart::instance('default')->count(),
                     ],
             ]);
+             //insert into Orders table
+             $order = Order::create([
+                'user_id' => auth()->user() ? auth()->user()->id : null,
+                'billing_name' => $request->name,
+                'billing_email' => $request->email,
+                'billing_address' => $request->address,
+                'billing_province' => $request->province,
+                'billing_city' => $request->city,
+                'billing_country' => $request->country,
+                'billing_zip' => $request->zipCode,
+                'billing_phone' => $request->tel,
+                'name_on_card' => $request->cardOwner,
+                'order_notes' =>$request->order_notes,
+                'billing_subtotal' => Cart::subtotal(),
+                'billing_tax' =>Cart::tax(),
+                'billing_total'=> Cart::total(),
+                'error' => null,
+            ]);
+            //insert into order_product table
+            foreach(Cart::content() as $item){
+                OrderProduct::create([
+                    'order_id' => $order->id,
+                    'product_id'=>$item->model->id,
+                    'quantity' => $item->qty
+                ]);
+            }
                 
             Cart::instance('default')->destroy();
             return back()->with('success', 'Payment successful');
 
         } catch (\Stripe\Exception\CardException  $e) {
            
-            return back()->with('error', 'Sorry, your Payment was not unsuccessful. Please re-check your credentials!');
+            return back()->with('error', 'Sorry, your payment was not successful. Please re-check your credentials!');
 
         }
    

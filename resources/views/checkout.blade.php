@@ -101,10 +101,10 @@
                             <h3 class="title">Billing address</h3>
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="name" placeholder="Name" required>
+                            <input class="input" type="text" name="name" placeholder="Name" value="{{ Auth::user()->name}}" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-" type="email" name="email" placeholder="Email" required>
+                            <input class="input form-" type="email" name="email" placeholder="Email" value="{{ Auth::user()->email}}" required>
                         </div>
                         <div class="form-group">
                             <input class="input form-" type="text" name="address" id="address"
@@ -143,7 +143,7 @@
                                 <div class="form-group">
                                     <label for="Card Number">Name on Card</label>
                                     <input class="input  form-control" type="text" name="cardOwner" id="name_on_card"
-                                        placeholder="" required>
+                                        placeholder="" value="{{ Auth::user()->name}}" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
