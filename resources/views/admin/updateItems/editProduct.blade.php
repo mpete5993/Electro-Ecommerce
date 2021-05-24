@@ -67,7 +67,7 @@
                                         </textarea>
                                     </div>
                                     <div class="form-inputs">
-                                        <label for="tags">In Stock</label><br>
+                                        <label for="tags">Out Stock</label><br>
                                         <input type="checkbox" name="instock" id="">
                                     </div>
                                     <div class="form-inputs">

@@ -13,7 +13,7 @@
                         <li><a href="{{ url('/about') }} ">About us</a></li>
                         <li><a href="{{ url('/blog') }} ">Blog</a></li>
                         <li><a href="{{ url('/contact') }} ">Contact Us</a></li>
-                        <li class="active"><a href="{{ route('/cart.index') }} "> Cart</a></li>
+                        <li class="active"><a href="{{ route('cart.index') }} "> Cart</a></li>
                     </ul>
                     <!-- /NAV -->
                 </div>

@@ -20,29 +20,34 @@ class StoreController extends Controller
         if(request()->category){
             $products = Product::with('category')->whereHas('category', function($query){
                 $query->where('slug', request()->category);
-            })->get();
+            })->paginate(9);
 
             $categories =  Category::all();
             $brands =  Brand::all();
             $top_selling = Product::inRandomOrder()->take(4)->get();
+            $categoryName = $categories->where('slug', request()->category)->first()->name;
+           
 
         }//filter by Brands
         elseif(request()->brand){
             $products = Product::with('brand')->whereHas('brand', function($query){
                 $query->where('slug', request()->brand);
-            })->get();
+            })->paginate(9);
 
             $categories =  Category::all();
             $brands =  Brand::all();
             $top_selling = Product::inRandomOrder()->take(4)->get();
+            
+            $categoryName = $brands->where('slug', request()->brand)->first()->name;
 
         }
         else{
             
-            $products = Product::orderBy('id', 'desc')->paginate(9);
+            $products = Product::orderBy('created_at' , 'desc')->paginate(9);
             $categories =  Category::all();
             $brands =  Brand::all();
             $top_selling = Product::inRandomOrder()->take(4)->get();
+            $categoryName  = 'Featured';
         }
 
 
@@ -50,7 +55,8 @@ class StoreController extends Controller
             'products' => $products,
             'categories' => $categories,
             'brands' => $brands,
-            'top_selling' => $top_selling
+            'top_selling' => $top_selling,
+            'categoryName' => $categoryName
         ]);
 
         
@@ -82,7 +88,7 @@ class StoreController extends Controller
         //     'search' => 'required|min:3'
         // ]);
         $search = $request->input('search');
-        $products= Product::where('product_name', 'like', "%$search%")->get();
+        $products= Product::where('product_name', 'like', "%$search%")->paginate(5);
 
        // $products = Product::search($search)->paginate(10);
         

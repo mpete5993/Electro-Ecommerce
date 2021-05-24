@@ -135,7 +135,7 @@ class ProductController extends Controller
             $post->brand_id = $request->brand;
         }
         if($request->instock){
-            $product->status = true;
+            $product->status = false;
         }
 
         $product->product_name = $request->name;

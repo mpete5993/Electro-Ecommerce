@@ -87,7 +87,10 @@
 					  </div>
 					@endforeach
 					@endif
-						{{-- {{$products->appends(request()->input())->links()}} --}}
+						
+					</div>
+					<div class="">
+						{{$products->appends(request()->input())->links()}}
 					</div>
 					
 				</div>

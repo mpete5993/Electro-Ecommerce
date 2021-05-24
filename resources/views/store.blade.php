@@ -31,7 +31,7 @@
 						<ul class="breadcrumb-tree">
 							<li><a href="{{ url('/') }}">Home</a></li>
 							<li><a href="{{ url('/store') }}">All Categories</a></li>
-							<li class="active"></li>
+							<li class="active"> {{ $categoryName}} </li>
 						</ul>
 					</div>
 				</div>
@@ -163,7 +163,7 @@
 
 							<div class="clearfix visible-sm visible-xs"></div>
                             
-                            @foreach ($products as $product)
+                            @forelse ($products as $product)
                             <div class="col-md-4 col-xs-6">
                                 <!-- product -->
                                 <div class="product">
@@ -202,26 +202,19 @@
                                         
                                         
                                         <!-- /product -->
-                            </div>
-                            @endforeach
+							</div>
+							@empty
+							<div class=""style="text-align:left;">
+								No Item(s) found
+							</div>
+                            @endforelse
 							<!-- /product -->
 						</div>
 						<!-- /store products -->
 
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
-							
-							{{-- <span class="store-qty">Showing {{$RelatedProduct->count()}} - {{$RelatedProduct->total()}} products</span> --}}
-							{{-- <ul class="store-pagination">
-                                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul> --}}
-                            {{ $products->links() }}
-							{{-- {{ $RelatedProduct->appends(request()->input())->links() }} --}}
+							{{ $products->appends(request()->input())->links() }}
 						</div>
 						<!-- /store bottom filter -->
 					</div>

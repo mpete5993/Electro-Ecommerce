@@ -72,6 +72,11 @@
                         <i class="fa fa-check-circle" aria-hidden="true"></i>
                         {{ session()->get('message') }}
                     </div>
+                @elseif(session()->has('error'))
+                <div class="alert alert-danger">
+                    
+                    {{ session()->get('error') }}
+                </div>
                 @endif
 
                 @if (count($errors) > 0)
@@ -88,7 +93,7 @@
 
             <div class="col-md-7">
                 <!-- Billing Details -->
-                <form action="" role="form" method="post" class="require-validation"
+                <form action="{{ route('stripe.post') }}" role="form" method="post" class="require-validation"
                     data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                     {{ csrf_field() }}
                     <div class="billing-details">
@@ -96,49 +101,34 @@
                             <h3 class="title">Billing address</h3>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="text" name="name" placeholder="Name" required>
+                            <input class="input" type="text" name="name" placeholder="Name" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="email" name="email" placeholder="Email" required>
+                            <input class="input form-" type="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="text" name="address" id="address"
+                            <input class="input form-" type="text" name="address" id="address"
                                 placeholder="Address" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="text" name="city" placeholder="City" id="city" required>
+                            <input class="input form-" type="text" name="city" placeholder="City" id="city" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="text" name="province" placeholder="province"
+                            <input class="input form-" type="text" name="province" placeholder="province"
                                 id="province" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="text" name="country" placeholder="Country"
+                            <input class="input form-" type="text" name="country" placeholder="Country"
                                 id="country" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="text" name="zipCode" placeholder="ZIP Code"
+                            <input class="input form-" type="text" name="zipCode" placeholder="ZIP Code"
                                 id="postalcode" required>
                         </div>
                         <div class="form-group">
-                            <input class="input form-control" type="tel" name="tel" placeholder="Telephone"
+                            <input class="input form-" type="tel" name="tel" placeholder="Telephone"
                                 id="telephone" required>
                         </div>
-                        {{-- <div class="form-group">
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="create-account">
-                                <label for="create-account">
-                                    <span></span>
-                                    Create Account?
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt.</p>
-                                    <input class="input" type="password" name="password"
-                                        placeholder="Enter Your Password">
-                                </div>
-                            </div>
-                        </div> ---}}
                     </div>
                     <div class="payment">
 
@@ -196,7 +186,7 @@
                             <!-- Order notes -->
                             <div class="col-md-12">
                                 <div class="order-notes"  style="margin-bottom: 10px;">
-                                    <textarea class="input form-control" name="order_notes"
+                                    <textarea class="input form-" name="order_notes"
                                         placeholder="Order Notes"></textarea>
                                 </div>
                             </div>
@@ -402,29 +392,31 @@
             <div><strong>PRODUCT</strong></div>
             <div><strong>TOTAL</strong></div>
         </div>
+        @foreach (Cart::instance('default')->content() as $item)
+            
         <div class="order-products">
                 <div class="order-col">
                     <div class="">
                         <a href="">
-                            <img src="" width="60px" height="50px"
-                                alt="">
+                            <img src=" {{$item->model->image}} " width="60px" height="50px" alt="">
                         </a>
                     </div>
-                    <div> product name</div>
-                    <div>R5222.00</div>
+                    <div> {{$item->model->product_name}} x {{$item->qty}} </div>
+                    <div>R{{$item->model->current_price}}</div>
                 </div>
         </div>
+        @endforeach
         <div class="order-col">
             <div>Shiping</div>
             <div><strong>FREE</strong></div>
         </div>
         <div class="order-col">
             <div>Tax</div>
-            <div><strong>R 7222.05</strong></div>
+            <div><strong>R {{Cart::tax()}} </strong></div>
         </div>
         <div class="order-col">
             <div><strong>TOTAL</strong></div>
-            <div><strong class="order-total">R7852</strong></div>
+            <div><strong class="order-total">R {{Cart::total()}} </strong></div>
         </div>
     </div>
     <hr>

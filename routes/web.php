@@ -21,7 +21,6 @@ Route::get('/store/{product}', [App\Http\Controllers\StoreController::class, 'sh
 Route::get('/search', [App\Http\Controllers\StoreController::class, 'search'])->name('search');
 Route::get('/cart',  [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::post('/cart',  [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
-Route::get('/checkout',  [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
 Route::get('/cart/incr/{id}/{qty}',  [App\Http\Controllers\CartController::class, 'incr'])->name('cart.incr');
 Route::get('/cart/decr/{id}/{qty}',  [App\Http\Controllers\CartController::class, 'decr'])->name('cart.decr');
 Route::delete('/cart/{product}',  [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
@@ -35,6 +34,14 @@ Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name
 Route::get('/blog/{post}', [App\Http\Controllers\BlogController::class, 'show'])->name('post.show');
 Route::post('/comment/{post_id}', [App\Http\Controllers\CommentsController::class, 'store'])->name('comments.store');
 Route::get('/postSearch',  [App\Http\Controllers\BlogController::class, 'search'])->name('post.search');
+//profile
+Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile.show');
+Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('profile.edit');
+
+//checkout
+// Route::get('stripe', [App\Http\Controllers\CheckoutController::class, 'stripe']);
+Route::post('stripe', [App\Http\Controllers\CheckoutController::class, 'stripePost'])->name('stripe.post');
+Route::get('/checkout',  [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
 
 Auth::routes();
 /* ############ admin routes ##############*/
