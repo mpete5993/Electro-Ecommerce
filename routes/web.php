@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 //Shop
 Route::get('/store', [App\Http\Controllers\StoreController::class, 'index'])->name('store');
 Route::get('/store/{product}', [App\Http\Controllers\StoreController::class, 'show'])->name('store.show');
@@ -25,6 +24,8 @@ Route::get('/cart/incr/{id}/{qty}',  [App\Http\Controllers\CartController::class
 Route::get('/cart/decr/{id}/{qty}',  [App\Http\Controllers\CartController::class, 'decr'])->name('cart.decr');
 Route::delete('/cart/{product}',  [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/cart/{product}',  [App\Http\Controllers\CartController::class, 'wishlist'])->name('cart.wishlist');
+//product Rating
+Route::post('/review',[App\Http\Controllers\StoreController::class, 'review'])->name('review.store');
 // wishlist
 Route::get('/wishlist', [App\Http\Controllers\WishlistController::class, 'index'] )->name('wishlist.index');
 Route::post('/wishlist/{product}',[App\Http\Controllers\WishlistController::class,'switchToCart'])->name('wishlist.show');//add to cart
@@ -53,6 +54,6 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     Route::resource('tags', 'TagController' , ['except' => ['show']]);
     Route::resource('posts', 'PostController' , ['except' => ['show']]);
     Route::resource('products', 'ProductController' , ['except' => ['show']]);
-    Route::resource('properties', 'PropertyController' , ['except' => ['show']]);
+    Route::resource('orders', 'OrderController' , ['except' => ['create']]);
 });
 /* ############ admin routes ##############*/

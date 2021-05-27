@@ -63,7 +63,7 @@
 									
 								</div> --}}
 								
-								<a class="review-link text-danger" href="#">Review(s) | Add your review</a>
+								<a class="review-link text-danger" href="#">{{$product->timesRated()}} Review(s) | Add your review</a>
 							</div>
 							<div>
 							<h3 class="product-price">R {{ $product->current_price }} <del class="product-old-price">R {{ $product->previous_price }} </del></h3>
@@ -163,7 +163,7 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								{{-- <li><a data-toggle="tab" href="#tab2">Details</a></li> --}}
-								<li><a data-toggle="tab" href="#tab3">Reviews ()</a></li>
+								<li><a data-toggle="tab" href="#tab3">Reviews ({{$product->timesRated()}})</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -210,7 +210,7 @@
 														<p><i class="fa fa-check-circle" aria-hidden="true"></i> </p>
 													</div>
 												@endif
-											<form class="review-form" method="POST" action="">
+											<form class="review-form" method="POST" action=" {{route('review.store')}} ">
 												{{ csrf_field() }}
 													<input class="input" type="text" name="name" placeholder="Your Name">
 													<input class="input" type="email" name="email" placeholder="Your Email">
@@ -224,8 +224,7 @@
 															<input id="star3" name="rate" value="3" type="radio"><label for="star3"></label>
 															<input id="star2" name="rate" value="2" type="radio"><label for="star2"></label>
 															<input id="star1" name="rate" value="1" type="radio"><label for="star1"></label>
-
-                                        					<input type="hidden" name="id" required="" value="">
+															<input type="hidden" name="id" required="" value="{{ $product->id }}">
 														</div>
 													</div>
 													<button class="primary-btn">Submit</button>
@@ -236,14 +235,62 @@
 										<!-- Reviews -->
 										<div class="col-md-6">
 											<div id="reviews">
-												{{-- {{$review->ratings->links() }} --}}
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+												<ul class="reviews">
+													@foreach ($reviews as $review)
+													<li>
+														<div class="review-heading">
+															<h5 class="name"> {{$review->name}} </h5>
+															<p class="date">{{$review->created_at->diffForHumans()}}</p>
+															@if ($review->rating == 5)
+																<div class="review-rating">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																</div>
+															@elseif($review->rating == 4)
+															<div class="review-rating">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star-o"></i>
+																</div>
+															@elseif($review->rating == 3)
+															<div class="review-rating">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																</div>
+															@elseif($review->rating == 2)
+															<div class="review-rating">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																</div>
+															@elseif($review->rating ==1)
+															<div class="review-rating">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																</div>
+															@endif
+														</div>
+														<div class="review-body">
+															{{ $review->review }}
+														</div>
+														</li>
+														@endforeach
 												</ul>
+												{{$reviews->links() }}
+												
 											</div>
 										</div>
 										<!-- /Reviews -->

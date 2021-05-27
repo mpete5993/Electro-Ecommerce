@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Tag;
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Product;
 
-class DashboardController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,34 +18,9 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return view('admin.index')->with([
-            'users' => User::all(),
-            'tags' => Tag::all(),
-            'categories' => Category::all(),
-            'posts' => Post::all(),
-            'products' => Product::all()
+        return view('admin.itemsList.orderList')->with([
+            'orders' => Order::orderBy('created_at', 'desc')->paginate(6)
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -59,6 +32,12 @@ class DashboardController extends Controller
     public function show($id)
     {
         //
+        $order = Order::where('id', $id)->firstOrFail();
+        return view('admin.viewItem.viewOrder')->with([
+            'order' => Order::find($id),
+            'products' => Product::all()
+            
+        ]);
     }
 
     /**
@@ -70,6 +49,10 @@ class DashboardController extends Controller
     public function edit($id)
     {
         //
+        return view('admin.updateItems.editOrder')->with([
+            'order' => Order::find($id),
+            
+        ]);
     }
 
     /**
@@ -82,6 +65,21 @@ class DashboardController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $order = Order::find($id);
+
+        if($request->shipped){
+            $order->shipped = true;
+        }
+
+        if($request->unshipped){
+            $order->shipped = false;
+        }
+
+        $order->save();
+
+        toastr()->success('Item updated successfully.!');
+        return redirect()->route('admin.orders.index');
+
     }
 
     /**
@@ -93,5 +91,8 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+        Order::destroy($id);
+        toastr()->success('Item deleted successfully');
+        return  redirect()->route('admin.orders.index');
     }
 }

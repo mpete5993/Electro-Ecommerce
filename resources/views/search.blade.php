@@ -84,7 +84,7 @@
 							View item <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
 							</a>
 						</div>
-					  </div>
+					</div>
 					@endforeach
 					@endif
 						

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use willvincent\Rateable\Rateable;
 
 class Product extends Model
 {
@@ -23,4 +24,6 @@ class Product extends Model
         return null !== $this->category()->where('name', $category)->first();
     }
     use HasFactory;
+
+    use Rateable;
 }

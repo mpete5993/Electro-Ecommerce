@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Tag;
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\User;
+use willvincent\Rateable\Rateable;
 use App\Models\Product;
 
-class DashboardController extends Controller
+
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +17,6 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return view('admin.index')->with([
-            'users' => User::all(),
-            'tags' => Tag::all(),
-            'categories' => Category::all(),
-            'posts' => Post::all(),
-            'products' => Product::all()
-        ]);
     }
 
     /**

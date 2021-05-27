@@ -44,8 +44,8 @@
                                 </div>
                                 <div class="col-lg-2 small-box">
                                     <div class="box-info">
-                                        {{-- <h6>{{ $properties->count()}}</h6> --}}
-                                        <span>Properties</span>
+                                        <h6>{{ $products->count()}}</h6>
+                                        <span>Products</span>
                                         <!-- <div class="">
                                         <a href="">View users <i class="fa fa-arrow-circle-o-right"></i></a>
 

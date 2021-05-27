@@ -31,6 +31,18 @@
                     <a href="{{ route('admin.dashboard' )}}" style="text-decoration: none"><h3><span><i class="fa fa-dashboard"></i></span>Dashboard</h3></a>
                 </div>
                 <div class="">
+                    <button class="accordion"><i class="fa fa-book"
+                            style="margin-right: 20px;color: #00c0ef;"></i>Orders <i
+                            class="fa fa-angle-down" style="float: right;"></i></button>
+                    <ul class="panel">
+                        
+                        <li>
+                            <span><a href="{{ route('admin.orders.index')}}"><i class="fa fa-table" style="margin-right: 10px;"></i> View
+                                Orders</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="">
                     <button class="accordion"><i class="fa fa-shopping-bag"
                             style="margin-right: 20px;color: #00c0ef;"></i>Products <i
                             class="fa fa-angle-down" style="float: right;"></i></button>

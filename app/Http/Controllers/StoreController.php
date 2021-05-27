@@ -5,6 +5,10 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use willvincent\Rateable\Rateable;
+use Auth;
+use App\Models\User;
+use App\Models\Rating;
 
 class StoreController extends Controller
 {
@@ -73,12 +77,14 @@ class StoreController extends Controller
     {
         //
         $product = Product::where('slug', $slug)->firstOrFail();
+        $review = Rating::all();
 
         return view('product')->with([
             'product' => $product,
             'categories' => Category::all(),
             'brands' => Brand::all(),
-            'popular' => Product::inRandomOrder()->take(4)->get()
+            'popular' => Product::inRandomOrder()->take(4)->get(),
+            'reviews' => $product->ratings()->paginate(4)
         ]);
     }
 
@@ -98,6 +104,32 @@ class StoreController extends Controller
             'brands' => Brand::all(),
             'top_selling' => Product::inRandomOrder()->take(4)->get()
         ]);;
+    }
+    public function review(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => 'required',
+            'rate' => 'required',
+            'review' => 'required'
+        ]);
+
+        $Review = Product::find($request->id);
+        
+        $review = new \willvincent\Rateable\Rating;
+        $review->name = $request->input('name');
+        $review->email = $request->input('email');
+        $review->review = $request->input('review');
+
+        $review->rating = $request->rate;
+
+        $review->user_id = '1';
+
+        $Review->ratings()->save($review);
+
+        //$productReview = \App\Product::where('slug',$slug)->with('rating')->paginate(3);
+
+        return back()->with('success', 'Thank you for your review');
     }
 
 }
