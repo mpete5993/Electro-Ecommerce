@@ -56,12 +56,61 @@
 					<!-- Product details -->
 					<div class="col-md-6 ">
 						<div class="product-details">
-							<h2 class="product-name"></h2>
+							<h2 class="product-name">{{ $product->product_name }}</h2>
 							<div>
 								{{-- <div class="product-rating" style="color:#D10024;">
 									<input id="input-1"   name="input-1" class="fa fa-star" data-min="0" data-max="5" data-step="0.1" value="{{ $product->averageRating }}" data-size="xs" disabled=""> 
 									
 								</div> --}}
+								@if ($product->userAverageRating == 5)
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								@elseif($product->userAverageRating >= 4 && $product->userAverageRating < 5)
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								@elseif($product->userAverageRating >= 3 && $product->userAverageRating < 4)
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								@elseif($product->userAverageRating >= 2 && $product->userAverageRating < 3)
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								@elseif($product->userAverageRating >= 1 && $product->userAverageRating < 2)
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								@elseif($product->userAverageRating == 0)
+									<div class="product-rating">
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+										<i class="fa fa-star-o"></i>
+									</div>
+								@endif
 								
 								<a class="review-link text-danger" href="#">{{$product->timesRated()}} Review(s) | Add your review</a>
 							</div>
@@ -79,22 +128,8 @@
 							<div class="my-2">
 								{!! Str::limit($product->Description , 200) !!}
 							</div>
-							<div class="product-options">
-								<label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label>
-								<label>
-									Color
-									<select class="input-select">
-										<option value="0">Red</option>
-									</select>
-								</label>
-							</div>
 
-							<div class="add-to-cart">
+							<div class="add-to-cart" style="margin-top: 50px">
 							@if (session()->has('message'))
 								<div class="alert alert-success" id="action-alert">
 									<i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -144,7 +179,10 @@
 							<ul class="product-links">
 								<li>Category:</li>
 								<li><a href="#">{{implode(' , ',$product->category()->get()->pluck('name')->toArray())}} </a></li>
-								
+							</ul>
+							<ul class="product-links">
+								<li>Brand:</li>
+								<li><a href="#"> {{$product->brand->name}} </a></li>
 							</ul>
 							
                 
@@ -161,16 +199,17 @@
 						<div id="product-tab">
 							<!-- product tab nav -->
 							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+								<li class="active"><a data-toggle="tab" href="#tab3">Reviews ({{$product->timesRated()}})</a></li>
+								<li><a data-toggle="tab" href="#tab1">Description</a></li>
 								{{-- <li><a data-toggle="tab" href="#tab2">Details</a></li> --}}
-								<li><a data-toggle="tab" href="#tab3">Reviews ({{$product->timesRated()}})</a></li>
+								
 							</ul>
 							<!-- /product tab nav -->
 
 							<!-- product tab content -->
 							<div class="tab-content">
 								<!-- tab1  -->
-								<div id="tab1" class="tab-pane fade in active">
+								<div id="tab1" class="tab-pane fade in ">
 									<div class="row ">
 										<div class="col-md-12 product_desciption">
 											{!! $product->Description !!}
@@ -190,7 +229,7 @@
 								<!-- /tab2  -->
 
 								<!-- tab3  -->
-								<div id="tab3" class="tab-pane fade in ">
+								<div id="tab3" class="tab-pane fade in active">
 									<div class="row">
 										<!-- Review Form -->
 										<div class="col-md-3">

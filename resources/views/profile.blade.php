@@ -32,7 +32,7 @@
                 <h3 class="breadcrumb-header">checkout</h3>
                 <ul class="breadcrumb-tree">
                     <li><a href=" {{ url('/') }} ">Home</a></li>
-                    <li class="active">Your profile</li>
+                    <li class="active">My profile</li>
                 </ul>
             </div>
         </div>
@@ -168,12 +168,13 @@
     <div class="container">
         <div class="row" id="property-header">
             <div class="col-lg-6 col-md-6">
-                <h5>My List</h5>
+                <h5>My Orders</h5>
             </div>
         </div>
 
         <div class="row">
-  </div>
+            
+        </div>
     </div>
 </div>
 <!---===== property List ====== ---->

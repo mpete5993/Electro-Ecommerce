@@ -171,7 +171,7 @@
 					<!-- row -->
 					<div class="widget">
 						<div class="keywords">
-								<form action=" http://127.0.0.1:8000/postSearch " method="get">
+								<form action="{{route('post.search')}} " method="get">
 									<input type="text" name="postsearch" id="" value="" placeholder="Enter Keywords"><button><i class="fa fa-search"></i></button>
 								</form>
 						</div>

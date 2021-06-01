@@ -264,7 +264,7 @@
                                                 <form action=" {{ route('cart.store') }} " method="post">
                                                     {{ csrf_field() }}
                                                     <input type="hidden" name="id" value="{{ $product->id }}">
-                                                    <input type="hidden" name="name" value="{{ $product->Name }}">
+                                                    <input type="hidden" name="name" value="{{ $product->product_name }}">
                                                     <input type="hidden" name="price"
                                                         value="{{ $product->current_price }}">
                                                     <input type="hidden" name="qty" value="1">
@@ -306,41 +306,27 @@
             <!-- row -->
             <div class="row">
                 @foreach ($posts as $post)
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <!-- post -->
-                        <div class="__blog_post ">
-                            <div class="related_blog_img">
-                                <!-- blog post image -->
-                                <a href="blog-details/{{$post->slug}}">
-                                    <img src=" {{asset('storage/'.$post->image)}} " class="related_img">
-                                </a>
-                                <!-- blog post image -->
-                            </div>
-
-                            <div class="__post_content">
-                                <div class="">
-                                    <!-- blog post title -->
-                                    <h4> {{$post->title}} </h4>
-                                    <!-- blog post title -->
-                                </div>
-                                <div class="">
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i>{{$post->created_at->diffForHumans()}}</li>
-                                        <li><i class="fa fa-comment-o"></i> {{$post->comments->count()}} Comments</li>
-                                    </ul>
-                                </div>
-                                <div class="">
-                                    <p>
-                                        {!! \Illuminate\Support\Str::limit($post->body, 30)!!}
-                                          <a  href="{{ url('blog-details/'.$post->slug) }}" class="__post_post">VIEW MORE</a>
-                                    </p>
-                                </div>
-
-                            </div>
-                            <!-- /post-->
+                <div class="col-lg-4 col-md-4 ">
+                    <div class="latest_post_container">
+                        <div class="latest_post_img">
+                            <a href="  {{ route('post.show', $post->slug)}} ">
+                                <img src=" {{ asset($post->image) }} " alt="">
+                            </a>
                         </div>
-                        <!--  /blog post column -->
+                        <div class="latest_post_content">
+                            <div class="">
+                            <h6> </h6>
+                            <p>Posted by  <b> {{$post->user->name}} </b>  {{ $post->created_at->diffForHumans() }} </p>
+                            </div>
+                            <div class="">
+                                {!! Str::limit($post->content , 200)!!}
+                            </div>
+                        </div>
+                        <div class="">
+                            <a href="" class="learn_more">Learn More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        </div>
                     </div>
+                </div>
                 @endforeach
             </div>
             <!-- /row -->

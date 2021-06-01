@@ -65,29 +65,36 @@
 
 					<!-- row -->
 					<div class="row">
+						@if ($posts->count() > 0)
 						@foreach ($posts as $post)
-							<div class="col-lg-6 col-md-6 ">
-								<div class="latest_post_container">
-									<div class="latest_post_img">
-										<a href="  {{ route('post.show', $post->slug)}} ">
-											<img src=" {{ asset($post->image) }} " alt="">
-										</a>
-									</div>
-									<div class="latest_post_content">
-										<div class="">
-										<h6> </h6>
-										<p>Posted by  <b> {{$post->user->name}} </b>  {{ $post->created_at->diffForHumans() }} </p>
-										</div>
-										<div class="">
-											{!! Str::limit($post->content , 200)!!}
-										</div>
+						<div class="col-lg-6 col-md-6 ">
+							<div class="latest_post_container">
+								<div class="latest_post_img">
+									<a href="  {{ route('post.show', $post->slug)}} ">
+										<img src=" {{ asset($post->image) }} " alt="">
+									</a>
+								</div>
+								<div class="latest_post_content">
+									<div class="">
+									<h6> </h6>
+									<p>Posted by  <b> {{$post->user->name}} </b>  {{ $post->created_at->diffForHumans() }} </p>
 									</div>
 									<div class="">
-										<a href="" class="learn_more">Learn More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+										{!! Str::limit($post->content , 200)!!}
 									</div>
 								</div>
+								<div class="">
+									<a href="" class="learn_more">Learn More <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
 							</div>
-						@endforeach
+						</div>
+					@endforeach
+					@else
+					<div class="" style="padding: 15px; ">
+						<p>No post found</p>
+						<a href=" {{route('blog')}} " class="learn_more">GO TO BLOG</a>
+					</div>
+						@endif
                     </div>
 					<!-- /row-->
 					<!-- row -->
@@ -95,15 +102,9 @@
 						<div class="col-lg-12">
 							<!-- store bottom filter -->
 						<div class="store-filter clearfix">
-							 {{-- <span class="store-qty">Showing {{$posts->count()}} - {{$posts->total()}} blog posts</span> --}}
-							{{--<ul class="store-pagination">
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-							</ul> --}}
-							{{-- {{$posts->links()}} --}}
+							 <span class="store-qty">Showing {{$posts->count()}} - {{$posts->total()}} blog posts</span>
+							
+							{{$posts->links()}}
 						</div>
 						<!-- /store bottom filter -->
 						</div>
@@ -114,7 +115,7 @@
                 
 					<div class="widget">
 						<div class="keywords">
-								<form action=" http://127.0.0.1:8000/postSearch " method="get">
+								<form action=" {{route('post.search')}} " method="get">
 									<input type="text" name="postsearch" id="" value="" placeholder="Enter Keywords"><button><i class="fa fa-search"></i></button>
 								</form>
 						</div>

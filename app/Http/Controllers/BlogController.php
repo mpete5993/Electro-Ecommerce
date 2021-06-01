@@ -20,7 +20,7 @@ class BlogController extends Controller
         if(request()->category){
             $posts = Post::with('category')->whereHas('category', function($query){
                 $query->where('slug', request()->category);
-            })->get();
+            })->paginate(4);
 
             $categories =  Category::all();
             $tags =  Tag::all();
@@ -31,7 +31,7 @@ class BlogController extends Controller
         {
             $posts= Post::with('tags')->whereHas('tags', function($query){
                 $query->where('slug', request()->tag);
-            })->get();
+            })->paginate(4);
 
             $categories =  Category::all();
             $tags =  Tag::all();
@@ -70,5 +70,22 @@ class BlogController extends Controller
             'popularPosts' => Post::inRandomOrder()->take(3)->get(),
             'comments' => $post->comments()->paginate(4)
         ]);
+    }
+
+    //post search
+    public function search(Request  $request)
+    {
+        $request->validate([
+            'postsearch' => 'required|min:3'
+        ]);
+        $postsearch = $request->input('postsearch');
+        $posts = Post::search($postsearch)->paginate(10);
+        
+        return view('postSearch')->with([
+            'posts' => $posts,
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+            'popularPosts' => Post::inRandomOrder()->take(3)->get(),
+        ]);;
     }
 }

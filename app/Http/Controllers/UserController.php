@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -14,8 +15,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function profile(){
+        $orders = Order::all();
+
         return view('profile')->with([
-            'user' => Auth::user()
+            'user' => Auth::user(),
+           
         ]);
     }
 
