@@ -19,11 +19,11 @@
         "nicolaslopezj/searchable": "^1.13",
         "stripe/stripe-php": "^7.79",
         "willvincent/laravel-rateable": "^2.3",
-        "yoeunes/toastr": "^1.2"
+        "yoeunes/toastr": "^1.2",
+        "fakerphp/faker": "^1.9.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
-        "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
