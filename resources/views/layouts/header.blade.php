@@ -28,7 +28,7 @@
 		<link rel="stylesheet" href="{{ secure_asset('app/css/font-awesome.min.css')}}">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="{{ secure_assetsecure_asset('app/css/style.css')}}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/style.css')}}"/>
 		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/blog.css')}}"/>
 
 		{{-- ratings --}}
