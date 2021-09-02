@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - E-commerce</title>
+		<title>Mpete - E-commerce</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -14,22 +14,22 @@
 		<link rel="shortcut icon" href="{{ asset('app/img/pzo3KD2xG8kw4MBq1dAm.png') }}" type="image/png">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="{{ asset('app/css/bootstrap.min.css') }}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/bootstrap.min.css') }}"/>
 	
 
 		<!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="{{ asset('app/css/slick.css') }}"/>
-		<link type="text/css" rel="stylesheet" href="{{ asset('app/css/slick-theme.css') }}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/slick.css') }}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/slick-theme.css') }}"/>
 
 		<!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="{{ asset('app/css/nouislider.min.css') }}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/nouislider.min.css') }}"/>
 
 		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="{{ asset('app/css/font-awesome.min.css')}}">
+		<link rel="stylesheet" href="{{ secure_asset('app/css/font-awesome.min.css')}}">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="{{ asset('app/css/style.css')}}"/>
-		<link type="text/css" rel="stylesheet" href="{{ asset('app/css/blog.css')}}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_assetsecure_asset('app/css/style.css')}}"/>
+		<link type="text/css" rel="stylesheet" href="{{ secure_asset('app/css/blog.css')}}"/>
 
 		{{-- ratings --}}
 		{{-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">  --}}
@@ -44,7 +44,7 @@
 
 		{{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> --}}
 
-		<link href="{{ asset('css/preview.css') }}" rel="stylesheet">
+		<link href="{{ secure_asset('css/preview.css') }}" rel="stylesheet">
 		
 
 {{-- 
